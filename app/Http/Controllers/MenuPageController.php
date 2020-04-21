@@ -329,17 +329,18 @@ class MenuPageController extends Facade {
           $mail = new PHPMailer(true);
           try {
               $mail->SMTPDebug = $debug;
-              $mail->isSMTP(); 
-              $mail->Host = 'secure227.servconfig.com';
+              $mail->isSMTP();
+            /* $mail->Host = 'secure227.servconfig.com';
               $mail->SMTPAuth = true;
               $mail->Username = 'noreply@bombaynite.com';
-              $mail->Password = 'opHl6T]!S(zY';
+              $mail->Password = 'opHl6T]!S(zY'; */
 
-/*
-              $mail->Host = 'mail.spxce.co';
-              $mail->SMTPAuth = true;
-              $mail->Username = 'simpleretailpos@spxce.co';
-              $mail->Password = '@sdQwe123';*/
+
+            $mail->Host = 'mail.simpleretailpos.com';
+            $mail->SMTPAuth = true;
+            $mail->Username = 'info@simpleretailpos.com';
+            $mail->Password = '@sdQwe123';
+
 
               $mail->SMTPSecure = 'tls';
               $mail->Port = 587;

@@ -146,6 +146,8 @@ class IndexController extends Controller {
     }
 
     public function index(Request $request) {
+
+
         $language = Language::all();
         $currency = Currency::all();
         $cs = CustomerSupport::all();

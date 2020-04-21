@@ -372,7 +372,6 @@ $Seo=$objSTD->Seo();
     <script type="text/javascript" src="<?php echo e(url('front-theme/js/jquery.easypiechart.min.js')); ?>"></script>
 
     <script src="<?php echo e(url('front-theme/js/sweetalert.min.js')); ?>"></script>
-    <?php echo $__env->make('frontend.extra.cart-js', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 <?php $__env->stopSection(); ?>
 
 

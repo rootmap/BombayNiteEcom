@@ -74,6 +74,7 @@
 <div class="widget blog-cat-w fx mini-category-list" id="menu_page_category_full" data-animate="fadeInLeft" style="max-height: 420px !important; overflow-y: scroll !important; border-top: 1px #ccc solid; border-bottom: 1px #ccc solid; padding-bottom:0px !important;">
 	<div class="widget-content" style="padding: 0px 10px !important;">
 		<ul class="list list-ok alt">
+			<li><a class="menu_page_category"  href="{{url('inclusive-meal')}}">ALL INCLUSIVE MEAL</a></li>
 			@if(count($category)>0)
 				@foreach($category as $cat)
 					<li><a class="menu_page_category"  href="#pro{{$cat['id']}}">{{$cat['name']}}</a><span>[{{$cat['product']}}]</span></li>

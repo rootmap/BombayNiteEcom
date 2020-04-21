@@ -302,7 +302,7 @@ $otherExtraPage=$objSTD->otherExtraPage();
                             <ul>
                                 <li>
                                     <a class="pagetitle" href="{{url('/inclusive-meal')}}">
-                                        Inclusive Meal
+                                        ALL INCLUSIVE MEAL
                                     </a>
                                 </li>
                                 @foreach($mainmenu as $menu)

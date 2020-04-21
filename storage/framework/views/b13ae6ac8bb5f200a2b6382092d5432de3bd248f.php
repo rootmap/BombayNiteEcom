@@ -85,13 +85,18 @@
                     var discount_rate=$(".top-shopping-cart-short").attr("data-delivery-discount");
                 }
 
-                //alert($(".top-shopping-cart-short").html());
+                var discount_rate=$(".top-shopping-cart-short").attr("data-discount");
+		        var discType=$(".top-shopping-cart-short").attr("data-disamount-type");
 
-                console.log(limit_check,discount_rate);
-                
+                if(discType.trim()=="Common")
+                {
+                    var limit_check=$(".top-shopping-cart-short").attr("data-disamount-limit");
+                    var discount_rate=$(".top-shopping-cart-short").attr("data-discount");
+                }
+
                 if(discount_rate)
                 {
-                        var discount_type = tax_rate.match(/%/g);
+                        var discount_type = discount_rate.match(/%/g);
                         if(discount_type=='%')
                         {
                                 
@@ -121,6 +126,10 @@
                         }
 
                 }
+
+                //alert($(".top-shopping-cart-short").html());
+
+                
             
                 var extraDeliveryCharge=0.00;
                 if(obj.rec=="Delivery")

@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', function () {
+/* Route::get('/', function () {
     return redirect(url('home'));
-});
+}); */
 Route::get('/static-object', function () {
     return view('frontend.static-object.index');
 });
@@ -77,6 +77,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
 });*/
 
 Route::get('/home','IndexController@index');
+Route::get('/','IndexController@index');
 Route::get('/inclusive-meal','ProductItemController@inclusiveMeal');
 Route::get('/order-item','ProductItemController@index');
 Route::get('/order-item/json','ProductItemController@product');

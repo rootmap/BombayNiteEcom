@@ -49,8 +49,12 @@ $Seo=$objSTD->Seo();
                     <div class="clearfix"></div>
                     <div class="padd-top-20"></div>
                     <!-- NOTE -->
-                    
-                    @include('frontend.extra.inclusive_menu')
+                    <div class="productdes">
+                        @include('frontend.extra.inclusive_menu')
+                    </div>
+                    <div class="productmbl">
+                        @include('frontend.extra.inclusive-mobile')
+                    </div>
                     
                      
                 </div>
@@ -216,6 +220,30 @@ $Seo=$objSTD->Seo();
 
             });
 
+            //mobile price
+            $('.inmPriceMobile').change(function(){
+                var tagID=$(this).attr('data-tag');
+                var getOptPrice=0;
+                $.each($('.imjMobile'+tagID),function(k,r){
+                    var getOptVal=$(r).val();
+                    if(getOptVal!=0)
+                    {
+                        var optnName=$(r).attr('name');
+                        var optPrice=$('select[name='+optnName+'] option:selected').attr('data-price');
+                        getOptPrice+=(optPrice-0);
+                    }
+                });
+
+                var defualtMeal=0;
+                $.each(inmJson,function(key,row){
+                     if(row.id==tagID){  defualtMeal=row.price; }
+                 });
+
+                totalPriceLine=parseFloat((defualtMeal-0)+(getOptPrice-0)).toFixed(2);
+                $('#micm_'+tagID).html(parseFloat(totalPriceLine));
+
+            });
+
             $('.addtocartim').click(function(){
                 var tagID=$(this).attr('data-pull');
                 var proName=$('#proName'+tagID).children('div').children().html();
@@ -225,6 +253,83 @@ $Seo=$objSTD->Seo();
                 var getOptNameParam='';
 
                 $.each($('.imj'+tagID),function(k,r){
+                    var getOptVal=$(r).val();
+                    if(getOptVal!=0)
+                    {
+                        if(getOptNameParam.length>0)
+                        {
+                            getOptNameParam+=',';
+                        }
+                        getOptNameParam+=$(r).attr('data-opt-cond')+':'+$(r).val();
+                        var optnName=$(r).attr('name');
+                        var optPrice=$('select[name='+optnName+'] option:selected').attr('data-price');
+                        getOptPrice+=(optPrice-0);
+                    }
+                });
+
+                //console.log('Product Name Param',getOptNameParam);
+
+                var defualtMeal=0;
+                $.each(inmJson,function(key,row){
+                     if(row.id==tagID){  defualtMeal=row.price; }
+                 });
+
+                 totalPriceLine=parseFloat((defualtMeal-0)+(getOptPrice-0)).toFixed(2);
+                 //console.log('totalPriceLine',totalPriceLine);
+
+                 /* if(getOptNameParam.length>0)
+                 {
+                    proName+='['+getOptNameParam+']';
+                 } */
+
+                 var prodRow=proName+'-'+getOptNameParam;
+
+                 $.each($(".mini-cart-list").children('li'),function(k,r){
+                    //console.log('Cart Roe',$(r).attr('data-id'));
+                    if($(r).attr('data-id'))
+                    {
+                        if($(r).attr('data-id')==prodRow)
+                        {
+                            var exQuantity=$(r).children('div').children('a').children('.cartQUANIT').html();
+                            var newQuantity=(exQuantity-0)+(1-0);
+                            $(r).children('div').children('a').children('.cartQUANIT').html(newQuantity);
+
+                            var exPrice=$(r).children('div').children('a').children('.cartItemPricePR').html();
+                            var NewPrice=parseFloat((exPrice-0)+(totalPriceLine-0)).toFixed(2);
+                            $(r).children('div').children('a').children('.cartItemPricePR').html(NewPrice);
+                            //alert('ALready Found');
+                            //return false;
+                        }
+                    }
+                 });
+
+                 //console.log(proName);
+                 //console.log(totalPriceLine);
+
+                 var addtoCartURL="{{url('order-item/add-to-cart')}}";
+                //------------------------Ajax POS Start-------------------------//
+                $.ajax({
+                    'async': true,
+                    'type': "POST",
+                    'global': false,
+                    'dataType': 'json',
+                    'url': addtoCartURL,
+                    'data': {'item_id':tagID,'price':totalPriceLine,'proName':proName,'inMealDetail':getOptNameParam,'inclusiveMeal':1,'_token':"{{csrf_token()}}"},
+                    'success': function (data) {
+                        //tmp = data;
+                    //   console.log("Processing : "+data);
+                        loadCart(data);
+                    }
+                });
+            });
+
+            $('.addtocartimMobile').click(function(){
+                var tagID=$(this).attr('data-pull');
+                var proName=$('#proMobileName'+tagID).children('span:eq(0)').html();
+                var getOptPrice=0;
+                var getOptNameParam='';
+
+                $.each($('.imjMobile'+tagID),function(k,r){
                     var getOptVal=$(r).val();
                     if(getOptVal!=0)
                     {

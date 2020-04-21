@@ -118,36 +118,24 @@ class ProductItemController extends Controller
             $cart->addRec("Collect");
         }
         
-
         $category=$this->categoryProduct();
-        //$product=Product::all();
         $defultReturn=['category'=>$category];
-
         if($this->checkCommonDiscount())
         {
             $defultReturn=array_merge($defultReturn,['common'=>$this->checkCommonDiscount()]);
         }
-
         if($this->checkColNDelDiscount())
         {
             $defultReturn=array_merge($defultReturn,['colndel'=>$this->checkColNDelDiscount()]);
         }        
-
         if($this->checkTax())
         {
             $defultReturn=array_merge($defultReturn,['tax'=>$this->checkTax()]);
         }
-
-
         $inclusiveMeal=InclusiveMeal::where('isactive',1)->get();
         $defultReturn=array_merge($defultReturn,['inclusiveMeal'=>$inclusiveMeal]);
-        
         $orderINfo=OrderInfo::orderBy('id','DESC')->first();
         $defultReturn=array_merge($defultReturn,['orderINfoText'=>$orderINfo,'tab'=>$tab]);
-        //dd($defultReturn);
-
-
-
         return view('frontend.pages.product.inclusivemeal',$defultReturn);
     }
 
@@ -1211,7 +1199,7 @@ class ProductItemController extends Controller
             $delivery->email,
             $this->sdc->order_admin_email,
             'Online Order Receipt - '.$this->sdc->SiteName,
-            $this->sdc->TableUserOrder($delivery->first_name,$this->sdc->SiteName).'<br>'.$siteMessage.$siteRegards,'');
+            $this->sdc->TableUserOrder($delivery->first_name,$this->sdc->SiteName).'<br>'.$siteMessage.$siteRegards,'','','',0);
 
             $this->sdc->initMail(
             $this->sdc->order_admin_email,
@@ -1221,16 +1209,16 @@ class ProductItemController extends Controller
         }
 
 
-        if($_SERVER['REMOTE_ADDR']=="103.57.42.222"){
+        if($_SERVER['REMOTE_ADDR']=="127.0.0.1"){
                 echo "Under Maintainence";
                 die();
             
         }
 
-        //die();
-        
-       // echo "Under Maintainence";
        // die();
+        
+        echo "Under Maintainence";
+        die();
 
         if($request->payment_method=="Cash")
         {

@@ -372,6 +372,5 @@ $Seo=$objSTD->Seo();
     <script type="text/javascript" src="{{url('front-theme/js/jquery.easypiechart.min.js')}}"></script>
 
     <script src="{{url('front-theme/js/sweetalert.min.js')}}"></script>
-    @include('frontend.extra.cart-js')
 @endsection
 

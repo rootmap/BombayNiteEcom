@@ -302,7 +302,7 @@ $otherExtraPage=$objSTD->otherExtraPage();
                             <ul>
                                 <li>
                                     <a class="pagetitle" href="<?php echo e(url('/inclusive-meal')); ?>">
-                                        Inclusive Meal
+                                        ALL INCLUSIVE MEAL
                                     </a>
                                 </li>
                                 <?php $__currentLoopData = $mainmenu; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $menu): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>

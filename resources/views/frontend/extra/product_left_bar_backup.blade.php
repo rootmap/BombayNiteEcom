@@ -52,6 +52,7 @@
 
 			@if(count($category)>0)
 				@foreach($category as $cat)
+		
 					<li><a class="menu_page_category"  href="#pro6{{$cat->id}}">{{$cat->name}}</a><span>[{{$cat->product}}]</span></li>
 				@endforeach
 			@endif

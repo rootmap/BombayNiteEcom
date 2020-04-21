@@ -319,6 +319,7 @@ $Seo=$objSTD->Seo();
 		var rec="<?php echo $rec; ?>";
 		var limit_check=$(".top-shopping-cart-short").attr("data-disamount-limit");
 		var discount_rate=$(".top-shopping-cart-short").attr("data-discount");
+		var discType=$(".top-shopping-cart-short").attr("data-disamount-type");
 		if(rec=="Collect")
 		{
 			var limit_check=$(".top-shopping-cart-short").attr("data-disamount-limit");
@@ -329,14 +330,20 @@ $Seo=$objSTD->Seo();
 			var limit_check=$(".top-shopping-cart-short").attr("data-delivery-disamount-limit");
 			var discount_rate=$(".top-shopping-cart-short").attr("data-delivery-discount");
 		}
+		
+		if(discType.trim()=="Common")
+		{
+			var limit_check=$(".top-shopping-cart-short").attr("data-disamount-limit");
+			var discount_rate=$(".top-shopping-cart-short").attr("data-discount");
+		}
 
 		//alert($(".top-shopping-cart-short").html());
 
-		console.log('Discount Rate',discount_rate);
+		console.log('Discount Rate',discType);
 		
 		if(discount_rate)
 		{
-				var discount_type = tax_rate.match(/%/g);
+				var discount_type = discount_rate.match(/%/g);
 				if(discount_type=='%')
 				{
 						
@@ -376,7 +383,8 @@ $Seo=$objSTD->Seo();
 
         //alert(rec);
 
-        /* var allowDiscount=false;
+
+         var allowDiscount=false;
         if(discType=="Collection" && rec=="Collect")
         {
             allowDiscount=true;
@@ -398,6 +406,8 @@ $Seo=$objSTD->Seo();
             allowDiscount=true;
         }
 
+		console.log('D Pre Discount Rate =',discount_rate);
+
         var discount_rate=$(".top-shopping-cart-short").attr("data-discount");
 
         if(discType && discDelType && rec=="Collect")
@@ -408,7 +418,7 @@ $Seo=$objSTD->Seo();
         {
         	var discount_rate=$(".top-shopping-cart-short").attr("data-delivery-discount");
         }
-
+		/*
         //alert(allowDiscount);
 
         //spend-discount
@@ -462,7 +472,8 @@ $Seo=$objSTD->Seo();
 
         } */
 
-        console.log(discType);
+        console.log('D Getting Discount',discType);
+        console.log('D Getting Discount Allow',allowDiscount);
         console.log(discount_rate,rec);
         console.log('Discount =',discount);
 
